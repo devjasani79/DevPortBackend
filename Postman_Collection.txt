@@ -1,0 +1,121 @@
+{
+  "info": {
+    "name": "DevPort Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5000/", "protocol": "http", "host": ["localhost"], "port": "5000", "path": [""] }
+      }
+    },
+    {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user+{{timestamp}}@example.com\",\n  \"password\": \"password123\",\n  \"full_name\": \"Test User\",\n  \"role\": \"customer\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","register"] }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","login"] }
+      }
+    },
+    {
+      "name": "Auth - Me (Get)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ],
+        "url": { "raw": "http://localhost:5000/api/auth/me", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","me"] }
+      }
+    },
+    {
+      "name": "Profiles - Create/Update",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"full_name\": \"Test User\",\n  \"phone\": \"+123456789\",\n  \"role\": \"customer\"\n}" },
+        "url": { "raw": "http://localhost:5000/api/profiles", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","profiles"] }
+      }
+    },
+    {
+      "name": "Customers - Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"company_name\": \"Acme Inc\",\n  \"contact_name\": \"John Doe\",\n  \"contact_email\": \"john@example.com\",\n  \"contact_phone\": \"+123456789\",\n  \"address_line1\": \"123 Main St\",\n  \"city\": \"NYC\",\n  \"state\": \"NY\",\n  \"postal_code\": \"10001\",\n  \"country\": \"USA\"\n}" },
+        "url": { "raw": "http://localhost:5000/api/customers", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","customers"] }
+      }
+    },
+    {
+      "name": "Shippers - Register",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"company_name\": \"FastShip\",\n  \"contact_name\": \"Jane Doe\",\n  \"contact_email\": \"jane@example.com\",\n  \"contact_phone\": \"+987654321\",\n  \"address_line1\": \"456 Market St\",\n  \"city\": \"SF\",\n  \"state\": \"CA\",\n  \"postal_code\": \"94105\",\n  \"country\": \"USA\",\n  \"license_number\": \"LIC123\",\n  \"modes_supported\": [\"air\", \"sea\"]\n}" },
+        "url": { "raw": "http://localhost:5000/api/shippers", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","shippers"] }
+      }
+    },
+    {
+      "name": "Shipment Requests - Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"origin\": \"Mumbai\",\n  \"destination\": \"Dubai\",\n  \"preferred_mode\": \"sea\",\n  \"cargo_type\": \"FMCG\",\n  \"container_type\": \"20ft\",\n  \"weight\": 1000,\n  \"volume\": 20,\n  \"notes\": \"Handle with care\"\n}" },
+        "url": { "raw": "http://localhost:5000/api/shipments/requests", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","shipments","requests"] }
+      }
+    },
+    {
+      "name": "Quotations - Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"shipment_request_id\": \"{{shipment_request_id}}\",\n  \"price\": 1200,\n  \"currency\": \"USD\",\n  \"estimated_delivery_days\": 7,\n  \"valid_until\": \"2025-12-31\",\n  \"additional_terms\": \"Includes insurance\"\n}" },
+        "url": { "raw": "http://localhost:5000/api/quotations", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","quotations"] }
+      }
+    },
+    {
+      "name": "Quotations - Update Status (Accept/Reject)",
+      "request": {
+        "method": "PATCH",
+        "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"status\": \"accepted\"\n}" },
+        "url": { "raw": "http://localhost:5000/api/quotations/{{quotation_id}}/status", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","quotations","{{quotation_id}}","status"] }
+      }
+    },
+    {
+      "name": "Shipments - Create (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{admin_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"quotation_id\": \"{{quotation_id}}\",\n  \"shipper_id\": \"{{shipper_id}}\",\n  \"customer_id\": \"{{customer_id}}\",\n  \"origin\": \"Mumbai\",\n  \"destination\": \"Dubai\",\n  \"cargo_type\": \"FMCG\",\n  \"container_type\": \"20ft\",\n  \"weight\": 1000,\n  \"volume\": 20,\n  \"estimated_delivery_date\": \"2025-01-15\",\n  \"tracking_number\": \"TRK123456\",\n  \"notes\": \"Deliver to warehouse 3\"\n}" },
+        "url": { "raw": "http://localhost:5000/api/shipments", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","shipments"] }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "access_token", "value": "" },
+    { "key": "admin_token", "value": "" },
+    { "key": "shipment_request_id", "value": "" },
+    { "key": "quotation_id", "value": "" },
+    { "key": "shipper_id", "value": "" },
+    { "key": "customer_id", "value": "" },
+    { "key": "timestamp", "value": "1690000000" }
+  ]
+}
+

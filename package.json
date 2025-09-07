@@ -1,0 +1,43 @@
+{
+  "name": "devportbackend",
+  "version": "1.0.0",
+  "description": "Backend For DevPort",
+  "homepage": "https://github.com/devjasani79/DevPortBackend#readme",
+  "bugs": {
+    "url": "https://github.com/devjasani79/DevPortBackend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devjasani79/DevPortBackend.git"
+  },
+  "license": "MIT",
+  "author": "DevJasani",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "build": "echo \"No build step required for Node.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:api": "node test-api.js",
+    "lint": "echo \"No linter configured\"",
+    "lint:fix": "echo \"No linter configured\"",
+    "health": "node -e \"console.log('Health check passed')\""
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.55.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10",
+    "postgres": "^3.4.7",
+    "node-fetch": "^2.6.7"
+  }
+}

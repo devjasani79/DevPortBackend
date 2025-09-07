@@ -1,0 +1,207 @@
+# API List with Role Access and Purpose
+
+---
+
+## Auth APIs
+
+### POST /auth/register
+- **Purpose:** Register a new user
+- **Roles:** Public
+
+### POST /auth/login
+- **Purpose:** Login user
+- **Roles:** Public
+
+### GET /auth/me
+- **Purpose:** Get current user profile
+- **Roles:** Authenticated users
+
+### PATCH /auth/me
+- **Purpose:** Update current user profile
+- **Roles:** Authenticated users
+
+### DELETE /auth/me
+- **Purpose:** Delete current user profile
+- **Roles:** Authenticated users
+
+---
+
+## Customer APIs
+
+### GET /users/customers
+- **Purpose:** Get all customers
+- **Roles:** Admin, Superadmin
+
+### GET /users/customers/:id
+- **Purpose:** Get customer by ID (self or any by admin)
+- **Roles:** Customer (self), Admin, Superadmin
+
+### POST /users/customers
+- **Purpose:** Create customer profile
+- **Roles:** Authenticated users
+
+### PUT /users/customers/:id
+- **Purpose:** Update customer profile (self or any by admin)
+- **Roles:** Customer (self), Admin, Superadmin
+
+### DELETE /users/customers/:id
+- **Purpose:** Delete customer profile
+- **Roles:** Admin, Superadmin
+
+---
+
+## Admin APIs
+
+### GET /users (adminRoutes)
+- **Purpose:** Get all users
+- **Roles:** Admin, Superadmin
+
+### PATCH /users/:id/role
+- **Purpose:** Update user role
+- **Roles:** Admin, Superadmin
+
+### PATCH /shippers/:id/status
+- **Purpose:** Update shipper status
+- **Roles:** Admin, Superadmin
+
+---
+
+## Superadmin APIs
+
+### PATCH /users/:id/role
+- **Purpose:** Set user role
+- **Roles:** Superadmin
+
+### DELETE /users/:id
+- **Purpose:** Delete user
+- **Roles:** Superadmin
+
+---
+
+## Shipper APIs
+
+### POST /users/shippers
+- **Purpose:** Register as shipper
+- **Roles:** Shipper
+
+### GET /users/shippers
+- **Purpose:** Get all shippers
+- **Roles:** Admin, Superadmin
+
+### GET /users/shippers/:id
+- **Purpose:** Get shipper by ID
+- **Roles:** Customer, Shipper, Admin, Superadmin
+
+### PUT /users/shippers/:id
+- **Purpose:** Update shipper profile
+- **Roles:** Shipper (self), Admin
+
+### DELETE /users/shippers/:id
+- **Purpose:** Delete shipper profile
+- **Roles:** Admin
+
+---
+
+## Profile APIs
+
+### GET /users/profiles
+- **Purpose:** Get all profiles
+- **Roles:** Admin, Superadmin
+
+### GET /users/profiles/:id
+- **Purpose:** Get profile by ID
+- **Roles:** Authenticated users
+
+### POST /users/profiles
+- **Purpose:** Create or update own profile
+- **Roles:** Authenticated users
+
+### PATCH /users/profiles/:id/verify
+- **Purpose:** Update profile verification status
+- **Roles:** Admin, Superadmin
+
+---
+
+## Quotation APIs
+
+### POST /quotations
+- **Purpose:** Create quotation
+- **Roles:** Shipper
+
+### GET /quotations
+- **Purpose:** Get all quotations
+- **Roles:** Admin, Superadmin
+
+### GET /quotations/request/:requestId
+- **Purpose:** Get quotations for a shipment request
+- **Roles:** Authenticated users
+
+### GET /quotations/:id
+- **Purpose:** Get quotation by ID
+- **Roles:** Shipper (owner), Admin, Superadmin
+
+### PATCH /quotations/:id/status
+- **Purpose:** Update quotation status
+- **Roles:** Admin, Superadmin
+
+---
+
+## Shipment APIs
+
+### POST /shipments/requests
+- **Purpose:** Create shipment request
+- **Roles:** Customer
+
+### GET /shipments/requests
+- **Purpose:** Get all shipment requests
+- **Roles:** Admin, Superadmin
+
+### GET /shipments/requests/:id
+- **Purpose:** Get shipment request by ID
+- **Roles:** Authenticated users
+
+### PATCH /shipments/requests/:id/send-to-shippers
+- **Purpose:** Send request to all shippers
+- **Roles:** Admin, Superadmin
+
+### PATCH /shipments/requests/:requestId/send-to-shipper/:shipperId
+- **Purpose:** Send request to a single shipper
+- **Roles:** Admin, Superadmin
+
+### PATCH /shipments/requests/:id/select-quotation
+- **Purpose:** Select a quotation for a request
+- **Roles:** Admin, Superadmin
+
+### PATCH /shipments/requests/:id/approve-quotation
+- **Purpose:** Approve a quotation
+- **Roles:** Customer
+
+### PATCH /shipments/requests/:id/reject-quotation
+- **Purpose:** Reject a quotation
+- **Roles:** Customer
+
+### PATCH /shipments/requests/:id/status
+- **Purpose:** Update shipment request status
+- **Roles:** Admin, Superadmin
+
+### POST /shipments
+- **Purpose:** Create shipment (after quotation accepted)
+- **Roles:** Admin, Superadmin
+
+### GET /shipments
+- **Purpose:** Get all shipments
+- **Roles:** Admin, Superadmin
+
+### GET /shipments/:id
+- **Purpose:** Get shipment by ID
+- **Roles:** Authenticated users
+
+### PATCH /shipments/:id/status
+- **Purpose:** Update shipment status
+- **Roles:** Admin, Superadmin
+
+---
+
+_All endpoints require authentication unless otherwise noted. Role-based access is enforced via middleware._
+
+_Last updated: September 7, 2025_
